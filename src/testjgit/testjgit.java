@@ -12,6 +12,7 @@ import org.eclipse.jgit.api.errors.NoFilepatternException;
 import org.eclipse.jgit.internal.storage.file.ObjectDirectory;
 import org.eclipse.jgit.lib.*;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 public class testjgit {
 
@@ -25,6 +26,8 @@ public class testjgit {
         }
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
         try {
+        	
+        	
             System.out.println(localRepoDir.getAbsolutePath().toString());
             System.out.println(Paths.get("").toAbsolutePath().toString());
             //Git git = Git.open(localRepoDir)
@@ -43,7 +46,7 @@ public class testjgit {
 	        git.add().addFilepattern(".").call();
 	        git.commit().setMessage("first commit").call();
 			
-	        git.push().setRemote("git@github.com:jluke13/testjgit.git").call();
+	        git.push().setRemote("https://github.com/jluke13/testjgit.git").setCredentialsProvider(new UsernamePasswordCredentialsProvider("jluke13", "4phunmat")).call();
 	        
 	        git.close();
 		} catch (IOException e) {
